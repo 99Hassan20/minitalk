@@ -6,7 +6,7 @@
 /*   By: hoigag <hoigag@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 01:21:53 by hoigag            #+#    #+#             */
-/*   Updated: 2023/01/26 09:42:40 by hoigag           ###   ########.fr       */
+/*   Updated: 2023/02/02 13:32:20 by hoigag           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,6 @@ int	main(int argc, char **argv)
 		send_char(message[i], pid);
 		i++;
 	}
+	send_char(message[0], pid);
 	return (0);
 }
