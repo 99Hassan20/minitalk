@@ -6,7 +6,7 @@
 /*   By: hoigag <hoigag@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 01:21:56 by hoigag            #+#    #+#             */
-/*   Updated: 2023/02/02 16:53:40 by hoigag           ###   ########.fr       */
+/*   Updated: 2023/02/11 13:22:23 by hoigag           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	main(void)
 	struct sigaction	sa;
 
 	sa.sa_sigaction = handlesig;
-	sa.sa_flags = SA_RESTART;
-	ft_printf(" PID : %d\n", getpid());
+	sa.sa_flags = SA_SIGINFO;
+	ft_printf("PID : %d\n", getpid());
 	while (1)
 	{
-		sigaction(SIGUSR1, &sa, NULL);
-		sigaction(SIGUSR2, &sa, NULL);
+		sigaction(SIGUSR1, &sa, 0);
+		sigaction(SIGUSR2, &sa, 0);
 	}
 	return (0);
 }

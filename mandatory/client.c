@@ -6,16 +6,11 @@
 /*   By: hoigag <hoigag@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 01:21:53 by hoigag            #+#    #+#             */
-/*   Updated: 2023/02/02 13:32:20 by hoigag           ###   ########.fr       */
+/*   Updated: 2023/02/11 13:16:39 by hoigag           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
-
-int	check_is_valid_pid(int pid)
-{
-	return (kill(pid, 0) == 0);
-}
 
 void	error_log(char *message)
 {
@@ -24,7 +19,32 @@ void	error_log(char *message)
 	exit(1);
 }
 
-void	send_char(char c, int pid)
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	sign;
+	int	res;
+
+	i = 0;
+	res = 0;
+	sign = 1;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (str[i])
+	{
+		if (!(str[i] >= '0' && str[i] <= '9'))
+			error_log("the pid should be an int");
+		res = res * 10 + (str[i] - 48);
+		i++;
+	}
+	return (res * sign);
+}
+
+static void	send_char(char c, int pid)
 {
 	int		i;
 	char	bit;
@@ -56,8 +76,8 @@ int	main(int argc, char **argv)
 \nmessage : the text to send");
 	pid = ft_atoi(argv[1]);
 	if (pid <= 0)
-		error_log("0 signal and non negative signals are not acceptable");
-	if (!check_is_valid_pid(pid))
+		error_log("0 signal and negative signals are not acceptable");
+	if (!(kill(pid, 0) == 0))
 		error_log("invalid pid");
 	message = argv[2];
 	i = 0;
@@ -66,6 +86,5 @@ int	main(int argc, char **argv)
 		send_char(message[i], pid);
 		i++;
 	}
-	send_char(message[0], pid);
 	return (0);
 }

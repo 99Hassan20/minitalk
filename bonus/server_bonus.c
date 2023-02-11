@@ -6,13 +6,26 @@
 /*   By: hoigag <hoigag@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 01:21:56 by hoigag            #+#    #+#             */
-/*   Updated: 2023/02/02 16:53:34 by hoigag           ###   ########.fr       */
+/*   Updated: 2023/02/07 12:54:42 by hoigag           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
-static void	reset_vars(int *index, char *character)
+void	print_bits(char c)
+{
+	int	i;
+
+	i = 7;
+	while (i >= 0)
+	{
+		ft_printf("%d", (c >> i) & 1);
+		i--;
+	}
+	ft_printf(" ");
+}
+
+static void	reset_vars(int *index, int *character)
 {
 	*index = 0;
 	*character = 0;
@@ -29,7 +42,7 @@ static void	send_back(int pid, int signum)
 
 static void	handlesig(int signum, siginfo_t *info, void *ucontext)
 {
-	static char	character;
+	static int	character;
 	static int	index;
 	static int	sender_pid;
 
@@ -48,6 +61,7 @@ static void	handlesig(int signum, siginfo_t *info, void *ucontext)
 		index++;
 	if (index == 8)
 	{
+		print_bits(character);
 		if (character == '\0')
 			send_back(info->si_pid, SIGUSR1);
 		write(1, &character, 1);

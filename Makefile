@@ -4,27 +4,29 @@ CFLAGS = -Wall -Werror -Wextra
 
 SERVER = server
 CLIENT = client
-SRCS = mandatory/ft_atoi.c 
 
 NAME_BONUS = minitalk_bonus
 SERVER_BONUS = server_bonus
 CLIENT_BONUS = client_bonus
 SRCS_BONUS = bonus/utils.c
 
-all : $(NAME) 
+all : printf $(NAME) 
 
 bonus: $(NAME_BONUS)
 
+printf:
+	make -C ./libftprintf all
+
 $(NAME) : $(SERVER) $(CLIENT)
+	
 	
 $(NAME_BONUS) : $(SERVER_BONUS) $(CLIENT_BONUS)
 
-$(SERVER) : $(SRCS) mandatory/server.c
-	make -C ./libftprintf all
+
+$(SERVER) : mandatory/server.c
 	$(CC) $(CFLAGS) $^ -L./libftprintf -lftprintf -o $@
 
-$(CLIENT) : $(SRCS) mandatory/client.c
-	make -C ./libftprintf all
+$(CLIENT) : mandatory/client.c
 	$(CC) $(CFLAGS) $^ -L./libftprintf -lftprintf -o $@
 
 $(SERVER_BONUS) : $(SRCS_BONUS) bonus/server_bonus.c
