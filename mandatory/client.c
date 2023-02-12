@@ -6,7 +6,7 @@
 /*   By: hoigag <hoigag@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 01:21:53 by hoigag            #+#    #+#             */
-/*   Updated: 2023/02/11 13:16:39 by hoigag           ###   ########.fr       */
+/*   Updated: 2023/02/12 18:44:59 by hoigag           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	send_char(char c, int pid)
 			status = kill(pid, SIGUSR2);
 		if (status == -1)
 			error_log("Could not send the signal");
-		usleep(100);
+		usleep(200);
 		i++;
 	}
 }

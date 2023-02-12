@@ -6,24 +6,11 @@
 /*   By: hoigag <hoigag@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 01:21:56 by hoigag            #+#    #+#             */
-/*   Updated: 2023/02/12 13:53:37 by hoigag           ###   ########.fr       */
+/*   Updated: 2023/02/12 18:45:49 by hoigag           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
-
-void	print_bits(char c)
-{
-	int	i;
-
-	i = 7;
-	while (i >= 0)
-	{
-		ft_printf("%d", (c >> i) & 1);
-		i--;
-	}
-	ft_printf(" ");
-}
 
 static void	reset_vars(int *index, int *character)
 {
@@ -74,7 +61,7 @@ int	main(void)
 
 	sa.sa_sigaction = handlesig;
 	sa.sa_flags = SA_SIGINFO;
-	ft_printf(" PID : %d\n", getpid());
+	ft_printf("PID : %d\n", getpid());
 	while (1)
 	{
 		sigaction(SIGUSR1, &sa, 0);
