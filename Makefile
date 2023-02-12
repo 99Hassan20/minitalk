@@ -12,7 +12,7 @@ SRCS_BONUS = bonus/utils.c
 
 all : printf $(NAME) 
 
-bonus: $(NAME_BONUS)
+bonus: printf $(NAME_BONUS)
 
 printf:
 	make -C ./libftprintf all
@@ -30,11 +30,9 @@ $(CLIENT) : mandatory/client.c
 	$(CC) $(CFLAGS) $^ -L./libftprintf -lftprintf -o $@
 
 $(SERVER_BONUS) : $(SRCS_BONUS) bonus/server_bonus.c
-	make -C ./libftprintf all
 	$(CC) $(CFLAGS) $^ -L./libftprintf -lftprintf -o $@
 
 $(CLIENT_BONUS) : $(SRCS_BONUS) bonus/client_bonus.c
-	make -C ./libftprintf all
 	$(CC) $(CFLAGS) $^ -L./libftprintf -lftprintf -o $@
 
 clean:

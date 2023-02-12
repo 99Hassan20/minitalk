@@ -6,7 +6,7 @@
 /*   By: hoigag <hoigag@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 01:21:56 by hoigag            #+#    #+#             */
-/*   Updated: 2023/02/07 12:54:42 by hoigag           ###   ########.fr       */
+/*   Updated: 2023/02/12 13:53:37 by hoigag           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static void	handlesig(int signum, siginfo_t *info, void *ucontext)
 		index++;
 	if (index == 8)
 	{
-		print_bits(character);
 		if (character == '\0')
 			send_back(info->si_pid, SIGUSR1);
 		write(1, &character, 1);
@@ -74,7 +73,7 @@ int	main(void)
 	struct sigaction	sa;
 
 	sa.sa_sigaction = handlesig;
-	sa.sa_flags = SA_RESTART;
+	sa.sa_flags = SA_SIGINFO;
 	ft_printf(" PID : %d\n", getpid());
 	while (1)
 	{

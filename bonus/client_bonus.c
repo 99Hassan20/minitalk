@@ -6,7 +6,7 @@
 /*   By: hoigag <hoigag@student.1337.ma>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 01:21:53 by hoigag            #+#    #+#             */
-/*   Updated: 2023/02/06 09:25:36 by hoigag           ###   ########.fr       */
+/*   Updated: 2023/02/12 15:22:34 by hoigag           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int argc, char **argv)
 \nmessage : the text to send");
 	pid = ft_atoi(argv[1]);
 	if (pid <= 0)
-		error_log("0 signal and non negative signals are not acceptable");
+		error_log("0 signal and negative signals are not acceptable");
 	if (!check_is_valid_pid(pid))
 		error_log("invalid pid");
 	message = argv[2];
@@ -64,8 +64,9 @@ int	main(int argc, char **argv)
 	while (message[i])
 	{
 		send_char(message[i], pid);
+		usleep(200);
 		i++;
-	}
+	}	
 	send_char(message[i], pid);
 	return (0);
 }
